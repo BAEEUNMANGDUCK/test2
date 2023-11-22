@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .target {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li th:each="dto, state: ${list}" th:if="${dto.sno % 5 == 0}">
+            [[${state.index}]] ----- [[${dto}]]
+        </li>
+    </ul>
+    <br>
+    <hr>
+
+    <ul>
+        <li th:each="dto, state: ${list}">
+            <span th:if="${dto.sno % 5 == 0}" th:text="${'--------------------'+dto.sno}"></span>
+            <span th:unless="${dto.sno % 5 == 0}" th:text="${dto.first}"></span>
+        </li>
+    </ul>
+    <br>
+    <hr>
+
+    <!--삼항 조건 연산자 -->
+    <ul>
+        <li th:each="dto, state : ${list}">
+            <span th:text="${dto.sno % 5 == 0 ? dto.sno : dto.first}"> </span>
+        </li>
+    </ul>
+
+    <!--삼항 조건 연산자 5의 배수일 때 CSS 스타일 적용(background-color)-->
+
+    <ul>
+        <li th:each="dto, state : ${list}">
+            <span th:class="${dto.sno % 5 == 0}?'target'" th:text="${dto}"> </span>
+        </li>
+    </ul>
+
+
+</body>
+</html>
